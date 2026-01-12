@@ -9,11 +9,12 @@ class AmbientSounds {
         this.videoUrls = {
             rain: 'https://assets.mixkit.co/videos/22729/22729-720.mp4',
             ocean: 'https://assets.mixkit.co/videos/6891/6891-720.mp4',
-            birds: 'https://assets.mixkit.co/videos/20656/20656-720.mp4',
+            forest: 'https://assets.mixkit.co/videos/47854/47854-720.mp4', // New Forest Video
             fire: 'https://assets.mixkit.co/videos/17158/17158-720.mp4',
             night: 'https://assets.mixkit.co/videos/4148/4148-720.mp4',
             wind: 'https://assets.mixkit.co/videos/2408/2408-720.mp4',
-            stream: 'https://assets.mixkit.co/videos/45368/45368-720.mp4'
+            space: 'https://assets.mixkit.co/videos/3173/3173-720.mp4', // New Space Video
+            meditation: 'https://assets.mixkit.co/videos/42609/42609-720.mp4' // New Zen Video
         };
 
         this.init();
@@ -59,22 +60,24 @@ class AmbientSounds {
         const localUrls = {
             rain: 'audio/rain.mp3',
             ocean: 'audio/ocean.mp3',
-            birds: 'audio/birds.mp3',
+            forest: 'audio/forest.mp3',
             fire: 'audio/fire.mp3',
             night: 'audio/night.mp3',
             wind: 'audio/wind.mp3',
-            stream: 'audio/stream.mp3'
+            space: 'audio/space.mp3',
+            meditation: 'audio/meditation.mp3'
         };
 
         // Online source URLs (fallback)
         const onlineUrls = {
             rain: 'https://assets.mixkit.co/active_storage/sfx/2390/2390-preview.mp3',
             ocean: 'https://assets.mixkit.co/active_storage/sfx/2393/2393-preview.mp3',
-            birds: 'https://www.freesoundslibrary.com/wp-content/uploads/2019/08/relaxing-birds-sounds.mp3',
+            forest: 'https://assets.mixkit.co/active_storage/sfx/2408/2408-preview.mp3', // Birds/Forest
             fire: 'https://assets.mixkit.co/active_storage/sfx/2391/2391-preview.mp3',
-            night: 'https://assets.mixkit.co/active_storage/sfx/2431/2431-preview.mp3',
+            night: 'https://assets.mixkit.co/active_storage/sfx/2431/2431-preview.mp3', // Updated Night Sound (try different one if bad)
             wind: 'https://assets.mixkit.co/active_storage/sfx/2392/2392-preview.mp3',
-            stream: 'https://assets.mixkit.co/active_storage/sfx/2394/2394-preview.mp3'
+            space: 'https://assets.mixkit.co/active_storage/sfx/2515/2515-preview.mp3', // Deep Space
+            meditation: 'https://assets.mixkit.co/active_storage/sfx/2157/2157-preview.mp3' // Zen Bells/Drone
         };
 
         // Try local file first
