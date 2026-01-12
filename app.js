@@ -18,16 +18,53 @@ class StressReliefApp {
     handleUserPersonalization() {
         let userName = localStorage.getItem('serenity_username');
         if (!userName) {
+            // Wait a bit for animations to settle, then show modal
             setTimeout(() => {
-                userName = prompt("Welcome to Serenity! How should we call you?", "Friend");
-                if (userName) {
-                    localStorage.setItem('serenity_username', userName);
-                    this.updateGreeting(userName);
-                }
-            }, 1000);
+                this.showWelcomeModal();
+            }, 1500);
         } else {
             this.updateGreeting(userName);
         }
+    }
+
+    showWelcomeModal() {
+        const modal = document.getElementById('welcome-modal');
+        const input = document.getElementById('nameInput');
+        const btn = document.getElementById('startJourneyBtn');
+
+        if (modal) {
+            modal.classList.add('active');
+
+            // Focus input after animation
+            setTimeout(() => input.focus(), 1000);
+
+            // Button click handler
+            btn.addEventListener('click', () => this.saveUserName());
+
+            // Enter key handler
+            input.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') this.saveUserName();
+            });
+        }
+    }
+
+    saveUserName() {
+        const input = document.getElementById('nameInput');
+        const name = input.value.trim() || 'Friend';
+
+        localStorage.setItem('serenity_username', name);
+        this.updateGreeting(name);
+
+        // Animate modal out
+        const modal = document.getElementById('welcome-modal');
+        const card = modal.querySelector('.modal-card');
+
+        card.style.transform = 'translateY(-50px) scale(0.9)';
+        card.style.opacity = '0';
+
+        setTimeout(() => {
+            modal.classList.remove('active');
+        }, 500);
     }
 
     updateGreeting(name) {

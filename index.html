@@ -17,6 +17,45 @@
 </head>
 
 <body>
+    <!-- Welcome Modal -->
+    <div id="welcome-modal" class="welcome-modal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content-wrapper">
+            <div class="modal-card">
+                <div class="modal-icon">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="45" fill="none" stroke="url(#modalGradient)" stroke-width="2" />
+                        <path d="M50 25 C60 45 80 45 80 65 C80 85 65 90 50 85 C35 90 20 85 20 65 C20 45 40 45 50 25 Z"
+                            fill="url(#modalGradient)" opacity="0.8" />
+                        <defs>
+                            <linearGradient id="modalGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#818cf8" />
+                                <stop offset="100%" stop-color="#c084fc" />
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <h2 class="modal-title">Hello, Friend</h2>
+                <p class="modal-subtitle">Begin your journey to serenity.</p>
+
+                <div class="input-group">
+                    <input type="text" id="nameInput" placeholder=" " autocomplete="off">
+                    <label for="nameInput">What should we call you?</label>
+                    <div class="input-line"></div>
+                </div>
+
+                <button id="startJourneyBtn" class="modal-btn">
+                    <span>Begin Journey</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Theme Toggle -->
     <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
         <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
