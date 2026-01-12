@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Employee Stress Relief App - Your personal wellness companion">
+    <meta name="theme-color" content="#6366f1">
+    <title>Serenity - Employee Stress Relief</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
+</head>
+
+<body>
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <!-- Main Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-overlay"></div>
+            <div class="header-content">
+                <div class="logo-wrapper">
+                    <svg class="serenity-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#818cf8;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#c084fc;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="3" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+                        <!-- Stylized Lotus leaves -->
+                        <path d="M50 20 C60 40 85 40 85 65 C85 85 65 90 50 85 C35 90 15 85 15 65 C15 40 40 40 50 20 Z"
+                            fill="url(#logoGrad)" filter="url(#glow)" />
+                        <path d="M50 35 C58 50 75 50 75 65 C75 80 60 85 50 80 C40 85 25 80 25 65 C25 50 42 50 50 35 Z"
+                            fill="white" opacity="0.3" />
+                        <circle cx="50" cy="62" r="8" fill="white" opacity="0.8" />
+                    </svg>
+                </div>
+                <h1 class="app-title">Serenity</h1>
+                <p class="app-subtitle" id="userGreeting">Your Personal Wellness Companion</p>
+            </div>
+        </header>
+
+        <div class="quote-ticker-container" id="quoteTicker">
+            <!-- Dynamic quote will appear here -->
+        </div>
+
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <button class="nav-btn active" data-module="home">
+                <svg class="nav-icon-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+                <span class="nav-label">Home</span>
+            </button>
+            <button class="nav-btn" data-module="breathing">
+                <svg class="nav-icon-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                    </path>
+                </svg>
+                <span class="nav-label">Breathe</span>
+            </button>
+            <button class="nav-btn" data-module="sounds">
+                <svg class="nav-icon-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 18V5l12-2v13"></path>
+                    <circle cx="6" cy="18" r="3"></circle>
+                    <circle cx="18" cy="16" r="3"></circle>
+                </svg>
+                <span class="nav-label">Sounds</span>
+            </button>
+            <button class="nav-btn" data-module="games">
+                <svg class="nav-icon-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="6" y1="6" x2="10" y2="10"></line>
+                    <line x1="6" y1="10" x2="10" y2="6"></line>
+                    <line x1="14" y1="6" x2="18" y2="10"></line>
+                    <line x1="14" y1="10" x2="18" y2="6"></line>
+                    <rect x="2" y="2" width="20" height="20" rx="2"></rect>
+                </svg>
+                <span class="nav-label">Games</span>
+            </button>
+            <button class="nav-btn" data-module="mood">
+                <svg class="nav-icon-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                <span class="nav-label">Mood</span>
+            </button>
+            <button class="nav-btn" data-module="quotes">
+                <svg class="nav-icon-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span class="nav-label">Quotes</span>
+            </button>
+            <button class="nav-btn" data-module="reminders">
+                <svg class="nav-icon-svg" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span class="nav-label">Breaks</span>
+            </button>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Home Module -->
+            <section id="home-module" class="module active">
+                <div class="welcome-section">
+                    <h2 class="section-title">Welcome Back!</h2>
+                    <p class="section-description">Take a moment for yourself. Choose an activity to help you relax and
+                        recharge.</p>
+
+                    <div class="quick-actions">
+                        <div class="quick-card" data-action="breathing">
+                            <svg class="quick-card-icon-svg" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path
+                                    d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                </path>
+                            </svg>
+                            <h3>Quick Breathing</h3>
+                            <p>2-minute guided exercise</p>
+                        </div>
+                        <div class="quick-card" data-action="sounds">
+                            <svg class="quick-card-icon-svg" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 18V5l12-2v13"></path>
+                                <circle cx="6" cy="18" r="3"></circle>
+                                <circle cx="18" cy="16" r="3"></circle>
+                            </svg>
+                            <h3>Calming Sounds</h3>
+                            <p>Relax with nature</p>
+                        </div>
+                        <div class="quick-card" data-action="games">
+                            <svg class="quick-card-icon-svg" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="6" y1="6" x2="10" y2="10"></line>
+                                <line x1="6" y1="10" x2="10" y2="6"></line>
+                                <line x1="14" y1="6" x2="18" y2="10"></line>
+                                <line x1="14" y1="10" x2="18" y2="6"></line>
+                                <rect x="2" y="2" width="20" height="20" rx="2"></rect>
+                            </svg>
+                            <h3>Stress Relief</h3>
+                            <p>Play a quick game</p>
+                        </div>
+                        <div class="quick-card" data-action="mood">
+                            <svg class="quick-card-icon-svg" xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                            </svg>
+                            <h3>Track Mood</h3>
+                            <p>How are you feeling?</p>
+                        </div>
+                    </div>
+
+                    <div class="daily-tip">
+                        <h3>Daily Wellness Tip</h3>
+                        <p id="dailyTip">Take regular breaks throughout your day. Even 5 minutes can make a big
+                            difference!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Breathing Module -->
+            <section id="breathing-module" class="module">
+                <h2 class="section-title">Guided Breathing</h2>
+                <p class="section-description">Follow the circle and breathe deeply</p>
+
+                <div class="breathing-container">
+                    <div class="breathing-circle">
+                        <div class="breathing-inner-circle"></div>
+                        <p id="breathingText" class="breathing-text">Breathe</p>
+                    </div>
+
+                    <div class="breathing-controls">
+                        <div class="pattern-selector">
+                            <label>Choose Pattern:</label>
+                            <select id="breathingPattern">
+                                <option value="478">4-7-8 Breathing (Relaxation)</option>
+                                <option value="box">Box Breathing (Focus)</option>
+                                <option value="calm">Calm Breathing (Quick Relief)</option>
+                            </select>
+                        </div>
+                        <button id="startBreathing" class="primary-btn">Start Exercise</button>
+                        <button id="stopBreathing" class="secondary-btn" style="display: none;">Stop</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sounds Module -->
+            <section id="sounds-module" class="module">
+                <div class="immersion-container">
+                    <video id="immersion-video" class="immersion-video" loop muted playsinline poster=""></video>
+                    <div class="video-overlay"></div>
+                </div>
+
+                <h2 class="section-title">Ambient Sounds</h2>
+                <p class="section-description">Create your perfect calming atmosphere with immersive visuals</p>
+
+                <div class="sounds-grid">
+                    <div class="sound-card" data-sound="rain">
+                        <div class="sound-image rain-bg"></div>
+                        <h3>Rain</h3>
+                        <div class="sound-controls">
+                            <button class="play-btn">Play</button>
+                            <input type="range" class="volume-slider" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                    <div class="sound-card" data-sound="ocean">
+                        <div class="sound-image ocean-bg"></div>
+                        <h3>Ocean Waves</h3>
+                        <div class="sound-controls">
+                            <button class="play-btn">Play</button>
+                            <input type="range" class="volume-slider" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                    <div class="sound-card" data-sound="birds">
+                        <div class="sound-image birds-bg"></div>
+                        <h3>Birds</h3>
+                        <div class="sound-controls">
+                            <button class="play-btn">Play</button>
+                            <input type="range" class="volume-slider" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                    <div class="sound-card" data-sound="fire">
+                        <div class="sound-image fire-bg"></div>
+                        <h3>Fireplace</h3>
+                        <div class="sound-controls">
+                            <button class="play-btn">Play</button>
+                            <input type="range" class="volume-slider" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                    <!-- New Sounds -->
+                    <div class="sound-card" data-sound="night">
+                        <div class="sound-image night-bg"></div>
+                        <h3>Night Crickets</h3>
+                        <div class="sound-controls">
+                            <button class="play-btn">Play</button>
+                            <input type="range" class="volume-slider" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                    <div class="sound-card" data-sound="wind">
+                        <div class="sound-image wind-bg"></div>
+                        <h3>Gentle Wind</h3>
+                        <div class="sound-controls">
+                            <button class="play-btn">Play</button>
+                            <input type="range" class="volume-slider" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                    <div class="sound-card" data-sound="stream">
+                        <div class="sound-image stream-bg"></div>
+                        <h3>Mountain Stream</h3>
+                        <div class="sound-controls">
+                            <button class="play-btn">Play</button>
+                            <input type="range" class="volume-slider" min="0" max="100" value="50">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Games Module -->
+            <section id="games-module" class="module">
+                <h2 class="section-title">Stress Relief Games</h2>
+                <p class="section-description">Take a quick break with these relaxing activities</p>
+
+                <div class="games-selector">
+                    <button class="game-select-btn active" data-game="bubbles">Bubble Pop</button>
+                    <button class="game-select-btn" data-game="colors">Color Match</button>
+                    <button class="game-select-btn" data-game="draw">Zen Draw</button>
+                    <button class="game-select-btn" data-game="mandala">Mandala Magic</button>
+                    <button class="game-select-btn" data-game="particles">Particle Flow</button>
+                </div>
+
+                <!-- Bubble Pop Game -->
+                <div id="bubbles-game" class="game-container active">
+                    <div class="game-stats">
+                        <span>Score: <strong id="bubbleScore">0</strong></span>
+                        <button id="resetBubbles" class="secondary-btn">Reset</button>
+                    </div>
+                    <canvas id="bubblesCanvas" width="800" height="500"></canvas>
+                </div>
+
+                <!-- Color Match Game -->
+                <div id="colors-game" class="game-container">
+                    <div class="game-stats">
+                        <span>Matches: <strong id="colorScore">0</strong></span>
+                        <button id="resetColors" class="secondary-btn">New Game</button>
+                    </div>
+                    <div id="colorGrid" class="color-grid"></div>
+                </div>
+
+                <!-- Zen Draw -->
+                <div id="draw-game" class="game-container">
+                    <div class="game-stats">
+                        <input type="color" id="drawColor" value="#6366f1">
+                        <input type="range" id="brushSize" min="1" max="20" value="5">
+                        <button id="clearCanvas" class="secondary-btn">Clear</button>
+                    </div>
+                    <canvas id="drawCanvas" width="800" height="500"></canvas>
+                </div>
+
+                <!-- Mandala Magic -->
+                <div id="mandala-game" class="game-container">
+                    <div class="game-stats">
+                        <input type="color" id="mandalaColor" value="#8b5cf6">
+                        <select id="mandalaSymmetry">
+                            <option value="6">6 Sides</option>
+                            <option value="8" selected>8 Sides</option>
+                            <option value="12">12 Sides</option>
+                        </select>
+                        <button id="clearMandala" class="secondary-btn">Clear</button>
+                    </div>
+                    <canvas id="mandalaCanvas" width="800" height="500"></canvas>
+                </div>
+
+                <!-- Particle Flow -->
+                <div id="particles-game" class="game-container">
+                    <div class="game-stats">
+                        <span>Move your mouse to control the flow</span>
+                        <button id="resetParticles" class="secondary-btn">Reset</button>
+                    </div>
+                    <canvas id="particlesCanvas" width="800" height="500"></canvas>
+                </div>
+            </section>
+
+            <!-- Mood Module -->
+            <section id="mood-module" class="module">
+                <h2 class="section-title">Mood Tracker</h2>
+                <p class="section-description">How are you feeling today?</p>
+
+                <div class="mood-logger">
+                    <div class="mood-options">
+                        <button class="mood-btn mood-excellent" data-mood="5" title="Excellent">
+                            <span class="mood-label">Excellent</span>
+                        </button>
+                        <button class="mood-btn mood-good" data-mood="4" title="Good">
+                            <span class="mood-label">Good</span>
+                        </button>
+                        <button class="mood-btn mood-okay" data-mood="3" title="Okay">
+                            <span class="mood-label">Okay</span>
+                        </button>
+                        <button class="mood-btn mood-not-great" data-mood="2" title="Not Great">
+                            <span class="mood-label">Not Great</span>
+                        </button>
+                        <button class="mood-btn mood-stressed" data-mood="1" title="Stressed">
+                            <span class="mood-label">Stressed</span>
+                        </button>
+                    </div>
+                    <textarea id="moodNote" placeholder="Add a note about your day (optional)..." rows="3"></textarea>
+                    <button id="saveMood" class="primary-btn">Save Mood</button>
+                </div>
+
+                <div class="mood-analytics">
+                    <h3>Your Mood History</h3>
+                    <div class="mood-chart">
+                        <canvas id="moodChart" width="600" height="300"></canvas>
+                    </div>
+                    <div id="moodHistory" class="mood-history"></div>
+                </div>
+            </section>
+
+            <!-- Quotes Module -->
+            <section id="quotes-module" class="module">
+                <h2 class="section-title">Daily Inspiration</h2>
+                <p class="section-description">Words of wisdom for your wellness journey</p>
+
+                <div class="quote-container">
+                    <div class="quote-card">
+                        <p id="quoteText" class="quote-text">"The greatest weapon against stress is our ability to
+                            choose one thought over another."</p>
+                        <p id="quoteAuthor" class="quote-author">- William James</p>
+                    </div>
+                    <button id="newQuote" class="primary-btn">New Quote</button>
+                </div>
+            </section>
+
+            <!-- Reminders Module -->
+            <section id="reminders-module" class="module">
+                <h2 class="section-title">Break Reminders</h2>
+                <p class="section-description">Set regular breaks to stay refreshed</p>
+
+                <div class="reminders-container">
+                    <div class="reminder-settings">
+                        <label>Reminder Interval:</label>
+                        <select id="reminderInterval">
+                            <option value="15">Every 15 minutes</option>
+                            <option value="30" selected>Every 30 minutes</option>
+                            <option value="60">Every 60 minutes</option>
+                            <option value="90">Every 90 minutes</option>
+                        </select>
+
+                        <div class="reminder-toggle">
+                            <label class="switch">
+                                <input type="checkbox" id="reminderEnabled">
+                                <span class="slider"></span>
+                            </label>
+                            <span id="reminderStatus">Reminders Off</span>
+                        </div>
+                    </div>
+
+                    <div class="reminder-info">
+                        <h3>Why Take Breaks?</h3>
+                        <ul>
+                            <li>✓ Reduces eye strain and physical tension</li>
+                            <li>✓ Improves focus and productivity</li>
+                            <li>✓ Prevents burnout and mental fatigue</li>
+                            <li>✓ Boosts creativity and problem-solving</li>
+                        </ul>
+                    </div>
+
+                    <div id="nextBreak" class="next-break" style="display: none;">
+                        <p>Next break in: <strong id="breakTimer">--:--</strong></p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+    <script src="breathing.js"></script>
+    <script src="sounds.js"></script>
+    <script src="games.js"></script>
+    <script src="mood.js"></script>
+    <script src="quotes.js"></script>
+    <script src="reminders.js"></script>
+</body>
+
+</html>
