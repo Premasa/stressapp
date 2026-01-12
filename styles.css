@@ -12,26 +12,27 @@
     --warning: #f59e0b;
     --danger: #ef4444;
 
-    --bg-primary: #f8fafc;
-    --bg-secondary: #ffffff;
+    /* Full Light Mode Colors */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
     --bg-tertiary: #f1f5f9;
 
-    /* Cosmic Glass Variables */
-    --glass-bg: rgba(255, 255, 255, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+    /* Cosmic Glass Variables (Light) */
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(99, 102, 241, 0.1);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
     --glass-blur: blur(12px);
 
-    --text-primary: #1e293b;
-    --text-secondary: #475569;
-    --text-tertiary: #94a3b8;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-tertiary: #64748b;
 
     --border-color: #e2e8f0;
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    --shadow-neon: 0 0 15px rgba(99, 102, 241, 0.4);
+    --shadow-neon: 0 0 15px rgba(99, 102, 241, 0.2);
 
     /* Spacing & Radius */
     --spacing-xs: 0.5rem;
@@ -59,13 +60,15 @@
     --secondary: #c084fc;
     --secondary-light: #d8b4fe;
 
-    --bg-primary: #0f172a;
+    /* Full Dark Mode Colors */
+    --bg-primary: #0b0f19;
+    /* Much darker, near black */
     --bg-secondary: #1e293b;
     --bg-tertiary: #334155;
 
-    --glass-bg: rgba(30, 41, 59, 0.7);
+    --glass-bg: rgba(15, 23, 42, 0.85);
     --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
@@ -85,16 +88,26 @@
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: var(--bg-primary);
-    background-image:
-        radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
-        radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
-        radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+
+    /* Dynamic Background for Themes */
+    /* By default (Light), use a subtle gradient */
+    background-image: radial-gradient(at 0% 0%, hsla(253, 16%, 90%, 1) 0, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(339, 49%, 90%, 1) 0, transparent 50%);
+
     background-attachment: fixed;
     color: var(--text-primary);
     line-height: 1.6;
-    transition: background-color var(--transition-normal), color var(--transition-normal);
+    transition: all var(--transition-normal);
     overflow-x: hidden;
     min-height: 100vh;
+}
+
+/* Dark Theme Background Override */
+[data-theme="dark"] body {
+    background-image:
+        radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+        radial-gradient(at 50% 0%, hsla(225, 39%, 10%, 1) 0, transparent 50%),
+        radial-gradient(at 100% 0%, hsla(339, 49%, 10%, 1) 0, transparent 50%);
 }
 
 /* ===== Welcome Modal Styles ===== */
@@ -577,12 +590,13 @@ body {
 }
 
 /* Reuse existing BG classes but ensure they work */
+/* Background Images - High Quality */
 .rain-bg {
-    background-image: url('https://images.unsplash.com/photo-1511634829096-045a111727eb?auto=format&fit=crop&q=80&w=800');
+    background-image: url('https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&q=80&w=800');
 }
 
 .ocean-bg {
-    background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&q=80&w=800');
+    background-image: url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&q=80&w=800');
 }
 
 .forest-bg {
@@ -590,23 +604,23 @@ body {
 }
 
 .space-bg {
-    background-image: url('https://images.unsplash.com/photo-1506318137071-a8bcbf675b27?auto=format&fit=crop&q=80&w=800');
+    background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5980?auto=format&fit=crop&q=80&w=800');
 }
 
 .meditation-bg {
-    background-image: url('https://images.unsplash.com/photo-1599447421405-0e3209d63136?auto=format&fit=crop&q=80&w=800');
+    background-image: url('https://images.unsplash.com/photo-1606041011872-596597976b25?auto=format&fit=crop&q=80&w=800');
 }
 
 .fire-bg {
-    background-image: url('https://images.unsplash.com/photo-1556191327-3d630d25073d?auto=format&fit=crop&q=80&w=800');
+    background-image: url('https://images.unsplash.com/photo-1542202229-7d9323845fee?auto=format&fit=crop&q=80&w=800');
 }
 
 .night-bg {
-    background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&q=80&w=800');
+    background-image: url('https://images.unsplash.com/photo-1532051438990-2daee7c62c2f?auto=format&fit=crop&q=80&w=800');
 }
 
 .wind-bg {
-    background-image: url('https://images.unsplash.com/photo-1721548176871-e0a58637b2c7?auto=format&fit=crop&q=80&w=800');
+    background-image: url('https://images.unsplash.com/photo-1466854076813-4aa9ac0fc347?auto=format&fit=crop&q=80&w=800');
 }
 
 /* ===== General Buttons ===== */
@@ -912,8 +926,10 @@ canvas {
     border: none;
     padding: 1rem;
     position: fixed;
-    bottom: 90px;
-    left: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Start exactly in the middle */
     width: 100%;
     z-index: 90;
     text-align: center;

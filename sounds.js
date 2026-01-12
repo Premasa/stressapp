@@ -62,7 +62,8 @@ class AmbientSounds {
             ocean: 'audio/ocean.mp3',
             forest: 'audio/forest.mp3',
             fire: 'audio/fire.mp3',
-            night: 'audio/night.mp3',
+            // Renamed to force fallback to online 'Starry Night' sound
+            night_local: 'audio/night.mp3',
             wind: 'audio/wind.mp3',
             space: 'audio/space.mp3',
             meditation: 'audio/meditation.mp3'
