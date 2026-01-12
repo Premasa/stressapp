@@ -903,4 +903,36 @@ canvas {
         padding: 2rem;
         width: 95%;
     }
+
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 90;
+    text-align: center;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.quote-text {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-primary);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 1s ease;
+    max-width: 800px;
+    margin: 0 auto;
+    display: inline-block;
+}
+
+.quote-text.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.quote-text::before,
+.quote-text::after {
+    content: '"';
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
 }
