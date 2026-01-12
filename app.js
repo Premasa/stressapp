@@ -31,12 +31,33 @@ class StressReliefApp {
         const modal = document.getElementById('welcome-modal');
         const input = document.getElementById('nameInput');
         const btn = document.getElementById('startJourneyBtn');
+        const title = modal.querySelector('.modal-title');
+        const subtitle = modal.querySelector('.modal-subtitle');
 
         if (modal) {
             modal.classList.add('active');
 
-            // Focus input after animation
-            setTimeout(() => input.focus(), 1000);
+            // Reset text for typing animation
+            title.textContent = '';
+            title.style.borderRight = '2px solid var(--primary)'; // Cursor effect
+
+            // Typing Animation
+            const text = "Hello, Friend 🌟";
+            let i = 0;
+            const typeWriter = () => {
+                if (i < text.length) {
+                    title.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                } else {
+                    title.style.borderRight = 'none'; // Remove cursor
+                    // Focus input after typing is done
+                    setTimeout(() => input.focus(), 500);
+                }
+            };
+
+            // Start typing after a brief delay
+            setTimeout(typeWriter, 500);
 
             // Button click handler
             btn.addEventListener('click', () => this.saveUserName());
