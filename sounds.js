@@ -63,7 +63,7 @@ class AmbientSounds {
             forest: 'audio/forest.mp3',
             fire: 'audio/fire.mp3',
             // Renamed to force fallback to online 'Starry Night' sound
-            night_local: 'audio/night.mp3',
+            night: 'audio/night.mp3',
             wind: 'audio/wind.mp3',
             space: 'audio/space.mp3',
             meditation: 'audio/meditation.mp3'
@@ -73,10 +73,10 @@ class AmbientSounds {
         const onlineUrls = {
             rain: 'https://assets.mixkit.co/active_storage/sfx/2390/2390-preview.mp3',
             ocean: 'https://assets.mixkit.co/active_storage/sfx/2393/2393-preview.mp3',
-            forest: 'https://assets.mixkit.co/active_storage/sfx/2408/2408-preview.mp3', // Birds/Forest
+            forest: 'https://assets.mixkit.co/active_storage/sfx/2392/2392-preview.mp3', // Verified Birds/Forest
             fire: 'https://assets.mixkit.co/active_storage/sfx/2391/2391-preview.mp3',
-            night: 'https://assets.mixkit.co/active_storage/sfx/2431/2431-preview.mp3', // Updated Night Sound (try different one if bad)
-            wind: 'https://assets.mixkit.co/active_storage/sfx/2392/2392-preview.mp3',
+            night: 'https://www.soundjay.com/nature/crickets-1.mp3', // Reliable Crickets
+            wind: 'https://actions.google.com/sounds/v1/weather/strong_wind.ogg', // Reliable Wind
             space: 'https://assets.mixkit.co/active_storage/sfx/2515/2515-preview.mp3', // Deep Space
             meditation: 'https://assets.mixkit.co/active_storage/sfx/2157/2157-preview.mp3' // Zen Bells/Drone
         };
