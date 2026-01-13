@@ -590,37 +590,37 @@ body {
 }
 
 /* Reuse existing BG classes but ensure they work */
-/* Background Images - High Quality - Forced */
+/* Background Images - High Quality - Unsplash */
 .rain-bg {
     background-image: url('https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&q=80&w=800') !important;
 }
 
 .ocean-bg {
-    background-image: url('https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&q=80&w=800') !important;
+    background-image: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&q=80&w=800') !important;
 }
 
 .forest-bg {
-    background-image: url('https://images.unsplash.com/photo-1448375240586-dfd8d395ea6c?auto=format&fit=crop&q=80&w=800') !important;
+    background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=800') !important;
 }
 
 .space-bg {
-    background-image: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5980?auto=format&fit=crop&q=80&w=800') !important;
+    background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800') !important;
 }
 
 .meditation-bg {
-    background-image: url('https://images.unsplash.com/photo-1606041011872-596597976b25?auto=format&fit=crop&q=80&w=800') !important;
+    background-image: url('https://images.unsplash.com/photo-1621262956272-9fc70566860d?auto=format&fit=crop&q=80&w=800') !important;
 }
 
 .fire-bg {
-    background-image: url('https://images.unsplash.com/photo-1542202229-7d9323845fee?auto=format&fit=crop&q=80&w=800') !important;
+    background-image: url('https://images.unsplash.com/photo-1513267048388-3498a6ef8025?auto=format&fit=crop&q=80&w=800') !important;
 }
 
 .night-bg {
-    background-image: url('https://images.unsplash.com/photo-1532051438990-2daee7c62c2f?auto=format&fit=crop&q=80&w=800') !important;
+    background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=800') !important;
 }
 
 .wind-bg {
-    background-image: url('https://images.unsplash.com/photo-1466854076813-4aa9ac0fc347?auto=format&fit=crop&q=80&w=800') !important;
+    background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800') !important;
 }
 
 /* ===== General Buttons ===== */
