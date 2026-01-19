@@ -166,6 +166,27 @@ class StressReliefGames {
             });
         });
 
+        // Touch support for bubbles
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            const mouseX = (touch.clientX - rect.left) * (canvas.width / rect.width);
+            const mouseY = (touch.clientY - rect.top) * (canvas.height / rect.height);
+
+            bubbles.forEach(bubble => {
+                if (bubble.isClicked(mouseX, mouseY) && !bubble.popped) {
+                    bubble.popped = true;
+                    score++;
+                    scoreElement.textContent = score;
+
+                    for (let i = 0; i < 10; i++) {
+                        particles.push(new PopParticle(bubble.x, bubble.y, bubble.color));
+                    }
+                }
+            });
+        });
+
         resetBtn.addEventListener('click', () => {
             bubbles = [];
             particles = [];
@@ -400,6 +421,31 @@ class StressReliefGames {
         clearBtn.addEventListener('click', () => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
         });
+
+
+        // Touch support for mandala
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isDrawing = true;
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            lastX = (touch.clientX - rect.left) * (canvas.width / rect.width);
+            lastY = (touch.clientY - rect.top) * (canvas.height / rect.height);
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault(); // Prevent scrolling
+            if (!isDrawing) return;
+            const touch = e.touches[0];
+            // Mimic mouse event structure for draw function
+            const mockEvent = {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            };
+            draw(mockEvent);
+        });
+
+        canvas.addEventListener('touchend', () => isDrawing = false);
     }
 
     // ===== Particle Flow Game =====
@@ -480,6 +526,30 @@ class StressReliefGames {
             const rect = canvas.getBoundingClientRect();
             mouse.x = (e.clientX - rect.left) * (canvas.width / rect.width);
             mouse.y = (e.clientY - rect.top) * (canvas.height / rect.height);
+        });
+
+
+
+        // Touch support for particles
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            mouse.x = (touch.clientX - rect.left) * (canvas.width / rect.width);
+            mouse.y = (touch.clientY - rect.top) * (canvas.height / rect.height);
+        });
+
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const touch = e.touches[0];
+            mouse.x = (touch.clientX - rect.left) * (canvas.width / rect.width);
+            mouse.y = (touch.clientY - rect.top) * (canvas.height / rect.height);
+        });
+
+        canvas.addEventListener('touchend', () => {
+            mouse.x = null;
+            mouse.y = null;
         });
 
         canvas.addEventListener('mouseleave', () => {

@@ -9,12 +9,12 @@ class AmbientSounds {
         this.videoUrls = {
             rain: 'https://assets.mixkit.co/videos/22729/22729-720.mp4',
             ocean: 'https://assets.mixkit.co/videos/6891/6891-720.mp4',
-            forest: 'https://assets.mixkit.co/videos/47854/47854-720.mp4', // New Forest Video
+            forest: 'https://assets.mixkit.co/videos/50635/50635-720.mp4', // Forest path video
             fire: 'https://assets.mixkit.co/videos/17158/17158-720.mp4',
             night: 'https://assets.mixkit.co/videos/4148/4148-720.mp4',
             wind: 'https://assets.mixkit.co/videos/2408/2408-720.mp4',
-            space: 'https://assets.mixkit.co/videos/3173/3173-720.mp4', // New Space Video
-            meditation: 'https://assets.mixkit.co/videos/42609/42609-720.mp4' // New Zen Video
+            space: 'https://assets.mixkit.co/videos/3163/3163-720.mp4', // Night sky with stars
+            meditation: 'https://assets.mixkit.co/videos/34565/34565-720.mp4' // Zen meditation stones
         };
 
         this.init();
@@ -49,12 +49,23 @@ class AmbientSounds {
             // Set initial volume
             this.setVolume(soundType, 0.5);
         });
+
+        // Ensure clean state on initialization - prevent auto-play
+        Object.values(this.sounds).forEach(sound => {
+            sound.isPlaying = false;
+            if (sound.audio && !sound.audio.paused) {
+                sound.audio.pause();
+                sound.audio.currentTime = 0;
+            }
+            sound.button.textContent = 'Play';
+            sound.button.classList.remove('playing');
+        });
     }
 
     createAudioElement(soundType) {
         const audio = new Audio();
         audio.loop = true;
-        audio.preload = 'auto';
+        audio.preload = 'none';
 
         // Local audio file paths (prioritize these)
         const localUrls = {
@@ -253,7 +264,8 @@ class AmbientSounds {
     setVolume(soundType, volume) {
         const sound = this.sounds[soundType];
         if (sound.audio.isFallback) {
-            sound.audio.gainNode.gain.value = volume * 0.3;
+            // Increased gain multiplier for audible fallback noise
+            sound.audio.gainNode.gain.value = volume * 2.0;
         } else {
             sound.audio.volume = volume;
         }
