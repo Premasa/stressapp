@@ -82,14 +82,14 @@ class AmbientSounds {
 
         // Online source URLs (fallback)
         const onlineUrls = {
-            rain: 'https://assets.mixkit.co/active_storage/sfx/2390/2390-preview.mp3',
-            ocean: 'https://assets.mixkit.co/active_storage/sfx/2393/2393-preview.mp3',
-            forest: 'https://assets.mixkit.co/active_storage/sfx/2392/2392-preview.mp3', // Verified Birds/Forest
-            fire: 'https://assets.mixkit.co/active_storage/sfx/2391/2391-preview.mp3',
-            night: 'https://www.soundjay.com/nature/crickets-1.mp3', // Reliable Crickets
-            wind: 'https://actions.google.com/sounds/v1/weather/strong_wind.ogg', // Reliable Wind
-            space: 'https://assets.mixkit.co/active_storage/sfx/2515/2515-preview.mp3', // Deep Space
-            meditation: 'https://assets.mixkit.co/active_storage/sfx/2157/2157-preview.mp3' // Zen Bells/Drone
+            rain: 'https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg',
+            ocean: 'https://actions.google.com/sounds/v1/nature/ocean_waves_large_sweep_1.ogg',
+            forest: 'https://actions.google.com/sounds/v1/birds/forest_birds_ambience.ogg',
+            fire: 'https://actions.google.com/sounds/v1/ambiences/fireplace.ogg',
+            night: 'https://actions.google.com/sounds/v1/nature/crickets_chirping_at_night.ogg',
+            wind: 'https://actions.google.com/sounds/v1/weather/strong_wind.ogg',
+            space: 'https://actions.google.com/sounds/v1/ambiences/deep_space.ogg', // (This one might be missing, but fallback covers it)
+            meditation: 'https://actions.google.com/sounds/v1/relax/meditation_bell.ogg' // Placeholder
         };
 
         // Try local file first
@@ -128,42 +128,157 @@ class AmbientSounds {
 
     createFallbackAudio(soundType) {
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const bufferSize = 4096;
-        const pinkNoise = audioContext.createScriptProcessor(bufferSize, 1, 1);
+        const nodes = []; // Keep track of nodes to disconnect later
         const gainNode = audioContext.createGain();
-        let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+        let source;
 
-        pinkNoise.onaudioprocess = function (e) {
-            const output = e.outputBuffer.getChannelData(0);
+        // Helper to create Noise buffer
+        const createNoiseBuffer = () => {
+            const bufferSize = 2 * audioContext.sampleRate;
+            const buffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+            const output = buffer.getChannelData(0);
             for (let i = 0; i < bufferSize; i++) {
                 const white = Math.random() * 2 - 1;
-                b0 = 0.99886 * b0 + white * 0.0555179;
-                b1 = 0.99332 * b1 + white * 0.0750759;
-                b2 = 0.96900 * b2 + white * 0.1538520;
-                b3 = 0.86650 * b3 + white * 0.3104856;
-                b4 = 0.55000 * b4 + white * 0.5329522;
-                b5 = -0.7616 * b5 - white * 0.0168980;
-                output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
-                output[i] *= 0.11;
-                b6 = white * 0.115926;
+                output[i] = (lastOut + (0.02 * white)) / 1.02;
+                lastOut = output[i];
+                output[i] *= 3.5;
             }
+            return buffer;
         };
+        let lastOut = 0;
 
-        const filter = audioContext.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.value = 1000;
+        switch (soundType) {
+            case 'ocean':
+                // Pink Noise + Modulated Filter/Gain for waves
+                const oceanBufferSize = 10 * audioContext.sampleRate;
+                const oceanBuffer = audioContext.createBuffer(1, oceanBufferSize, audioContext.sampleRate);
+                const oceanData = oceanBuffer.getChannelData(0);
+                for (let i = 0; i < oceanBufferSize; i++) {
+                    const white = Math.random() * 2 - 1;
+                    oceanData[i] = (lastOut + (0.02 * white)) / 1.02;
+                    lastOut = oceanData[i];
+                    oceanData[i] *= 3.5;
+                }
 
-        pinkNoise.connect(filter);
-        filter.connect(gainNode);
+                source = audioContext.createBufferSource();
+                source.buffer = oceanBuffer;
+                source.loop = true;
+
+                // Lowpass filter to muffle the noise
+                const oceanFilter = audioContext.createBiquadFilter();
+                oceanFilter.type = 'lowpass';
+                oceanFilter.frequency.value = 400;
+
+                // LFO to modulate volume (simulating waves)
+                const waveLfo = audioContext.createOscillator();
+                waveLfo.type = 'sine';
+                waveLfo.frequency.value = 0.1; // 1 wave every 10 seconds
+
+                const lfoGain = audioContext.createGain();
+                lfoGain.gain.value = 500; // Modulate volume significantly
+
+                // Connect graph
+                // LFO -> Filter Freq (simulate rushing water)
+                waveLfo.connect(lfoGain);
+                // lfoGain.connect(oceanFilter.frequency); // Optional: modulate cutoff
+
+                // LFO -> Main Gain (Volume Swell)
+                const swellGain = audioContext.createGain();
+                swellGain.gain.value = 0.3;
+                waveLfo.connect(swellGain.gain);
+
+                source.connect(oceanFilter);
+                oceanFilter.connect(swellGain);
+                swellGain.connect(gainNode);
+
+                nodes.push(source, oceanFilter, waveLfo, lfoGain, swellGain);
+                waveLfo.start();
+                source.start();
+                break;
+
+            case 'meditation':
+            case 'space':
+                // Drone: 3 Sine oscillators
+                const osc1 = audioContext.createOscillator();
+                const osc2 = audioContext.createOscillator();
+                const osc3 = audioContext.createOscillator();
+
+                osc1.type = 'sine';
+                osc2.type = 'sine';
+                osc3.type = 'sine';
+
+                // Root, Fifth, Octave (A2 approx 110Hz)
+                const root = soundType === 'space' ? 65 : 110; // Lower for space
+                osc1.frequency.value = root;
+                osc2.frequency.value = root * 1.5; // Fifth
+                osc3.frequency.value = root * 2;   // Octave
+
+                const droneGain = audioContext.createGain();
+                droneGain.gain.value = 0.15;
+
+                osc1.connect(droneGain);
+                osc2.connect(droneGain);
+                osc3.connect(droneGain);
+                droneGain.connect(gainNode);
+
+                nodes.push(osc1, osc2, osc3, droneGain);
+                osc1.start();
+                osc2.start();
+                osc3.start();
+
+                // Add a slow LFO for "movement"
+                const droneLfo = audioContext.createOscillator();
+                droneLfo.frequency.value = 0.2;
+                const droneLfoGain = audioContext.createGain();
+                droneLfoGain.gain.value = 0.05;
+                droneLfo.connect(droneLfoGain);
+                droneLfoGain.connect(droneGain.gain);
+                nodes.push(droneLfo, droneLfoGain);
+                droneLfo.start();
+
+                break;
+
+            case 'rain':
+            case 'forest':
+            case 'wind':
+            default:
+                // Standard Brown/Pinkish Noise
+                const bufferSize = 2 * audioContext.sampleRate;
+                const noiseBuffer = audioContext.createBuffer(1, bufferSize, audioContext.sampleRate);
+                const output = noiseBuffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    const white = Math.random() * 2 - 1;
+                    output[i] = (lastOut + (0.02 * white)) / 1.02;
+                    lastOut = output[i];
+                    output[i] *= 3.5;
+                }
+
+                source = audioContext.createBufferSource();
+                source.buffer = noiseBuffer;
+                source.loop = true;
+
+                const filter = audioContext.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = soundType === 'wind' ? 400 : 800; // Lower for wind
+
+                source.connect(filter);
+                filter.connect(gainNode);
+
+                nodes.push(source, filter);
+                source.start();
+                break;
+        }
+
         gainNode.connect(audioContext.destination);
 
         return {
             context: audioContext,
-            source: pinkNoise,
+            source: source, // Main source (might be null if multiple oscillators)
+            nodes: nodes,   // ALL nodes to stop later
             gainNode: gainNode,
-            filter: filter,
             isFallback: true,
-            started: false
+            started: true,
+            type: soundType
         };
     }
 
@@ -187,10 +302,7 @@ class AmbientSounds {
 
         try {
             if (sound.audio.isFallback) {
-                if (!sound.audio.started) {
-                    sound.audio.source.connect(sound.audio.filter);
-                    sound.audio.started = true;
-                }
+                // For synthesized audio, we rely on context suspension/resumption
                 if (sound.audio.context.state === 'suspended') {
                     sound.audio.context.resume();
                 }
@@ -214,6 +326,7 @@ class AmbientSounds {
 
         try {
             if (sound.audio.isFallback) {
+                // For synthesized audio, we rely on context suspension
                 if (sound.audio.context.state === 'running') {
                     sound.audio.context.suspend();
                 }
